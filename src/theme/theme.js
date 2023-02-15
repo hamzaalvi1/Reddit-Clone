@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { Button } from "./Button";
 import '@fontsource/open-sans/300.css'
 import '@fontsource/open-sans/400.css'
 import '@fontsource/open-sans/700.css'
@@ -17,8 +18,12 @@ const styles = {
   global: ()=>({
     body:{
       bg: "gray.200"
-    }
+    },
   })
 }
 
-export const theme = extendTheme({ colors, fonts,styles });
+const components = {
+  Button
+}
+
+export const theme = extendTheme({ colors, fonts,styles,components });
