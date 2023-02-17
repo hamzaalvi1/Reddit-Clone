@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   open: false,
-  view: "login",
+  view: "log In",
 };
 
 export const authModal = createSlice({
@@ -10,9 +10,11 @@ export const authModal = createSlice({
   initialState,
   reducers: {
     isModalOpen: (state, action) => {
-      const { payload } = action;
-      state.open = payload.open;
-      state.view = payload.view;
+      const {
+        payload: { open, view },
+      } = action;
+      state.open = open;
+      state.view = view;
     },
   },
 });

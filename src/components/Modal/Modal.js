@@ -10,22 +10,24 @@ import {
 
 function ModalUI(props) {
   const {
-    open,
+    isOpen,
     onClose,
     title,
     styleProps,
     children,
     isFooterEnabled,
     footerChildren,
+    ...rest
   } = props;
   return (
     <>
-      <Modal isOpen={open} onClose={onClose} sx={styleProps}>
-        <ModalOverlay />
-        <ModalContent>
+      <Modal isOpen={isOpen} onClose={onClose} {...rest } >
+        
+        <ModalOverlay bg='blackAlpha.300' />
+        <ModalContent   sx={styleProps}>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>{children}</ModalBody>
+          <ModalBody >{children}</ModalBody>
           {isFooterEnabled && (
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={onClose}>

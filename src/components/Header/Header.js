@@ -4,6 +4,7 @@ import { styles } from "./HeaderStyles";
 
 import { AuthButtons } from "./AuthButtons"
 import { SearchBar } from "./SearchBar";
+import { AuthModal } from "../AuthModal";
 
 function Header() {
  
@@ -19,6 +20,7 @@ function Header() {
       </Flex>
       <SearchBar/>
       <AuthButtons/>
+      <AuthModal/>
     </Flex>
   );
 }
