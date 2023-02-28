@@ -6,6 +6,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Heading,
 } from "@chakra-ui/react";
 
 function ModalUI(props) {
@@ -21,13 +22,21 @@ function ModalUI(props) {
   } = props;
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} {...rest } >
-        
-        <ModalOverlay bg='blackAlpha.300' />
-        <ModalContent   sx={styleProps}>
-          <ModalHeader>{title}</ModalHeader>
+      <Modal isOpen={isOpen} onClose={onClose} {...rest}>
+        <ModalOverlay bg="blackAlpha.300" />
+        <ModalContent sx={styleProps}>
+          <ModalHeader paddingBottom={0}>
+            <Heading
+              as="h6"
+              fontWeight={500}
+              fontSize={"20px"}
+              lineHeight={"24px"}
+            >
+              {title}
+            </Heading>
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody >{children}</ModalBody>
+          <ModalBody>{children}</ModalBody>
           {isFooterEnabled && (
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={onClose}>
