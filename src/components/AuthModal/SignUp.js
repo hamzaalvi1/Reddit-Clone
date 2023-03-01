@@ -22,6 +22,22 @@ function SignUp(props) {
         value={""}
         onChange={(e) => {}}
       />
+      <Input
+        type="password"
+        placeholder="Password"
+        name="password"
+        sx={inputStyles}
+        value={""}
+        onChange={(e) => {}}    
+      />
+      <Input
+        type="password"
+        placeholder="Confirm Password"
+        name="confirmPassword"
+        sx={inputStyles}
+        value={""}
+        onChange={(e) => {}}    
+      />
 
       <Button sx={buttonStyles} textStyle="secondary" title="Continue" />
       <Text fontSize={13} textStyle="secondary" margin={"0 10px"}>
