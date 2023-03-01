@@ -8,8 +8,8 @@ import { AuthConstants } from "@/config/constants";
 function Login(props) {
   const dispatch = useDispatch();
   const { inputStyles, buttonStyles } = props;
-  const redirectSignUp = () =>
-    dispatch(isModalOpen({ view: AuthConstants.SIGNUP, open: true }));
+  const redirectSignUp = () =>{
+    dispatch(isModalOpen({ view: AuthConstants.SIGNUP, open: true }));}
   return (
     <>
       <Input
