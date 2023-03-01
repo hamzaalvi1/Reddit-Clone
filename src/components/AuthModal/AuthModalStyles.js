@@ -1,5 +1,3 @@
-
-
 export const styleProps = {
   boxShadow: "2xl",
   maxHeight: "600px",
@@ -7,6 +5,9 @@ export const styleProps = {
   width: "100%",
   height: "100%",
   padding: "30px",
+  display: "flex",
+  justifyContent: "center",
+  // alignItems:"center"
 };
 export const inputStyles = {
   borderRadius: "1.25em",
@@ -49,30 +50,30 @@ export const OAuthButtonsStyles = {
 };
 
 export const orTextStyles = {
-  fontSize:"16",
-  textStyle:"secondary",
-  fontWeight:"semibold",
-  textAlign:"center",
-  color:"gray.600",
-  position:"relative",
-  ":before":{
+  fontSize: "16",
+  textStyle: "secondary",
+  fontWeight: "semibold",
+  textAlign: "center",
+  color: "gray.600",
+  position: "relative",
+  ":before": {
     content: "''",
-    position:"absolute",
-    width:"110px",
-    height:"1px",
+    position: "absolute",
+    width: "110px",
+    height: "1px",
     background: "gray.300",
-    left:0,
-    top:"50%",
-    transform:"translateY(-50%)"
+    left: 0,
+    top: "50%",
+    transform: "translateY(-50%)",
   },
-  ":after":{
+  ":after": {
     content: "''",
-    position:"absolute",
-    width:"110px",
-    height:"1px",
+    position: "absolute",
+    width: "110px",
+    height: "1px",
     background: "gray.300",
-    right:0,
-    top:"50%",
-    transform:"translateY(-50%)"
-  }
-}
+    right: 0,
+    top: "50%",
+    transform: "translateY(-50%)",
+  },
+};

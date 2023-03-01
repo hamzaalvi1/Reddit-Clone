@@ -22,7 +22,7 @@ function ModalUI(props) {
   } = props;
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} {...rest}>
+      <Modal isOpen={isOpen} onClose={onClose} {...rest} >
         <ModalOverlay bg="blackAlpha.300" />
         <ModalContent sx={styleProps}>
           <ModalHeader paddingBottom={0}>

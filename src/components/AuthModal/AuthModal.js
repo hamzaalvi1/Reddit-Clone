@@ -2,7 +2,7 @@ import { Modal } from "@/components/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { isModalOpen } from "@/store/Slices/AuthModalSlice";
 import { Text, Flex } from "@chakra-ui/react";
-import { Input } from "../Input";
+import { Login, SignUp } from "./";
 import { Button } from "../Button";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
@@ -13,6 +13,7 @@ import {
   OAuthButtonsStyles,
   orTextStyles,
 } from "./AuthModalStyles";
+import { AuthConstants } from "@/config/constants";
 
 function AuthModal(props) {
   const { open, view } = useSelector(({ authModal }) => authModal);
@@ -55,60 +56,11 @@ function AuthModal(props) {
             <Text sx={orTextStyles}>OR</Text>
 
             <Flex as="div" flexFlow={"column"} margin={"20px 0"}>
-              <Input
-                type="text"
-                placeholder="Username"
-                name="username"
-                sx={inputStyles}
-                value={""}
-                onChange={(e) => console.log(e)}
-              />
-              <Input
-                type="password"
-                placeholder="Password"
-                name="password"
-                sx={inputStyles}
-                value={""}
-                onChange={(e) => console.log(e)}
-              />
-              <Text fontSize={13} textStyle="secondary" margin={"0 10px"}>
-                Forget your{" "}
-                <Text
-                  as="span"
-                  color={"blue.600"}
-                  fontWeight={700}
-                  textStyle="primary"
-                  cursor={"pointer"}
-                  textDecoration={"underline"}
-                >
-                  username
-                </Text>{" "}
-                or{" "}
-                <Text
-                  as="span"
-                  color={"blue.600"}
-                  fontWeight={700}
-                  textStyle="primary"
-                  cursor={"pointer"}
-                  textDecoration={"underline"}
-                >
-                  password
-                </Text>{" "}
-                ?
-              </Text>
-              <Button sx={buttonStyles} textStyle="secondary" title="Log In" />
-              <Text fontSize={13} textStyle="secondary" margin={"0 10px"}>
-                New Reddit?{" "}
-                <Text
-                  as="span"
-                  color={"blue.600"}
-                  fontWeight={700}
-                  textStyle="primary"
-                  cursor={"pointer"}
-                >
-                  SignUp
-                </Text>
-              </Text>
+              {view == AuthConstants.LOGIN ? (
+                <Login inputStyles={inputStyles} buttonStyles={buttonStyles} />
+              ) : (
+                <SignUp inputStyles={inputStyles} buttonStyles={buttonStyles} />
+              )}
             </Flex>
           </Flex>
         </>
