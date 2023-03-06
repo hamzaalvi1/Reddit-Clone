@@ -5,7 +5,7 @@ const initialState = {
   view: "log In",
 };
 
-export const authModal = createSlice({
+ const authModal = createSlice({
   name: "Auth Modal",
   initialState,
   reducers: {
