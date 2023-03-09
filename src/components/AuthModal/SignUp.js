@@ -1,16 +1,24 @@
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { Text } from "@chakra-ui/react";
-
-import { useDispatch } from "react-redux";
+import { useToast } from '@chakra-ui/react'
+import { useDispatch,useSelector } from "react-redux";
+import { getMe } from "@/store/Slices/AuthSlice";
 import { isModalOpen } from "@/store/Slices/AuthModalSlice";
 import { AuthConstants } from "@/config/constants";
 
 function SignUp(props) {
+  const { inputStyles, buttonStyles } = props; 
+  const toast = useToast()
   const dispatch = useDispatch();
-  const { inputStyles, buttonStyles } = props;
+  const {loading} = useSelector((state)=>state.Authentication)
+
   const redirectLogin = () =>
     dispatch(isModalOpen({ view: AuthConstants.LOGIN, open: true }));
+
+  const handleSignUp = () => {
+    dispatch(getMe({toast}))
+  };
 
   return (
     <>
@@ -28,7 +36,7 @@ function SignUp(props) {
         name="password"
         sx={inputStyles}
         value={""}
-        onChange={(e) => {}}    
+        onChange={(e) => {}}
       />
       <Input
         type="password"
@@ -36,10 +44,16 @@ function SignUp(props) {
         name="confirmPassword"
         sx={inputStyles}
         value={""}
-        onChange={(e) => {}}    
+        onChange={(e) => {}}
       />
 
-      <Button sx={buttonStyles} textStyle="secondary" title="Continue" />
+      <Button
+        sx={buttonStyles}
+        textStyle="secondary"
+        title="Continue"
+        loading={loading}
+        handleClick={handleSignUp}
+      />
       <Text fontSize={13} textStyle="secondary" margin={"0 10px"}>
         Already a redditor?{" "}
         <Text

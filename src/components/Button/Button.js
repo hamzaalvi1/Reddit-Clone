@@ -6,21 +6,23 @@ function UIButton(props) {
     variant = "solid",
     rightIcon,
     leftIcon,
-    isLoading = false,
     styleProps,
     className,
+    loading = false,
+    type = "click",
     ...rest
   } = props;
 
   return (
     <Button
+      type={type}
       onClick={handleClick}
       variant={variant}
       rightIcon={rightIcon}
       leftIcon={leftIcon}
-      isLoading={isLoading}
       sx={styleProps}
       className={className}
+      isLoading={loading}
       {...rest}
     >
       {title}

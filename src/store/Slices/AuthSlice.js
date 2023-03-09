@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/config";
 
 const initialState = {
@@ -10,14 +10,30 @@ const initialState = {
 
 export const getMe = createAsyncThunk(
   "authentication/getMe",
-  async (userPayload, { rejectWithValue }) => {
-    const [createUserWithEmailAndPassword, user, error] =
-      useCreateUserWithEmailAndPassword(auth);
+  async ({ userPayload, toast }, { rejectWithValue }) => {
     try {
-      await createUserWithEmailAndPassword(userPayload);
-      return user;
+      const createUser = await createUserWithEmailAndPassword(
+        auth,
+        "hamza@abc.com",
+        "123456"
+      );
+      if (createUser.user) {
+        toast({
+          title: `Account created successfully`,
+          status: "success",
+          isClosable: true,
+          position: "bottom-right",
+        });
+      }
+      return createUser.user;
     } catch (err) {
-      return rejectWithValue(error);
+      toast({
+        title: `${err.message}`,
+        status: "error",
+        isClosable: true,
+        position: "bottom-right",
+      });
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -41,4 +57,4 @@ const authenticationSlice = createSlice({
   },
 });
 
-export default authenticationSlice.reducer
+export default authenticationSlice.reducer;
