@@ -25,6 +25,7 @@ export const getMe = createAsyncThunk(
           position: "bottom-right",
         });
       }
+      console.log(createUser,"createUser")
       return createUser.user;
     } catch (err) {
       toast({
