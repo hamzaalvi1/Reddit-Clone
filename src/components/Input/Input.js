@@ -17,6 +17,7 @@ function InputField(props) {
     name,
     variant = "filled",
     inputStyles,
+    autoCompleteTag,
     ...rest
   } = props;
 
@@ -33,6 +34,7 @@ function InputField(props) {
         placeholder={placeholder}
         name={name}
         sx={inputStyles}
+        autoComplete={autoCompleteTag}
         {...rest}
       />
       {InputRightElements && (

@@ -1,6 +1,6 @@
 import { Button } from "../Button";
 import { Input } from "../Input";
-import { Text } from "@chakra-ui/react";
+import { Text, } from "@chakra-ui/react";
 import { useToast } from '@chakra-ui/react'
 import { useDispatch,useSelector } from "react-redux";
 import { getMe } from "@/store/Slices/AuthSlice";
