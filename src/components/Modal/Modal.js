@@ -7,7 +7,9 @@ import {
   ModalBody,
   ModalCloseButton,
   Heading,
+  Button
 } from "@chakra-ui/react";
+
 
 function ModalUI(props) {
   const {

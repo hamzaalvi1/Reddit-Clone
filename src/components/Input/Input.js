@@ -24,7 +24,9 @@ function InputField(props) {
   return (
     <InputGroup sx={inputGroupStyles}>
       {InputLeftElements && (
-        <InputLeftElement children={<InputLeftElements />} />
+        <InputLeftElement>
+          <InputLeftElements />
+        </InputLeftElement>
       )}
       <Input
         type={type}
@@ -38,7 +40,9 @@ function InputField(props) {
         {...rest}
       />
       {InputRightElements && (
-        <InputRightElement children={<InputRightElements />} />
+        <InputRightElement>
+          <InputRightElements />
+        </InputRightElement>
       )}
     </InputGroup>
   );

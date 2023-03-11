@@ -11,11 +11,12 @@ function Header() {
   return (
     <Flex align={"center"} justifyContent={"space-between"} sx={styles} p={"0px 20px"} as={"header"}>
       <Flex align={"center"} >
-        <Image src="/assets/images/redditFace.png" h={"30px"} mr={2} />
+        <Image src="/assets/images/redditFace.png" h={"30px"} mr={2}  alt="logo"/>
         <Image
           src="/assets/images/redditText.png"
           h={"20px"}
           display={{ base: "none", md: "unset" }}
+          alt="logo-name"
         />
       </Flex>
       <SearchBar/>

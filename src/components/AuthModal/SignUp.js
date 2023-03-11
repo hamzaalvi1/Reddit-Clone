@@ -63,6 +63,7 @@ function SignUp(props) {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                autoComplete = {"username"}
               />
               <FormikErrorText
                 fieldName={"email"}
