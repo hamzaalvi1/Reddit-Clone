@@ -1,7 +1,9 @@
 import { Modal } from "@/components/Modal";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
 import { isModalOpen } from "@/store/Slices/AuthModalSlice";
-import { Text, Flex } from "@chakra-ui/react";
+import { signInWithGoogle } from "@/store/Slices/AuthSlice";
+import { Text, Flex, useToast } from "@chakra-ui/react";
 import { Login, SignUp } from "./";
 import { Button } from "../Button";
 import { FcGoogle } from "react-icons/fc";
@@ -16,10 +18,16 @@ import {
 import { AuthConstants } from "@/config/constants";
 
 function AuthModal(props) {
+  const [oAuthLoading, setOAuthLoading] = useState({
+    google: false,
+    apple: false,
+  });
+  const toast = useToast();
   const { open, view } = useSelector(({ authModal }) => authModal);
   const dispatch = useDispatch();
 
   const handleModalClose = () => dispatch(isModalOpen({ open: false }));
+  const handleGoogleLogin = () => dispatch(signInWithGoogle({ setOAuthLoading, toast }))
 
   return (
     <>
@@ -43,12 +51,15 @@ function AuthModal(props) {
                 textStyle="secondary"
                 variant={"oauth"}
                 title="Continue with Google"
+                loading={oAuthLoading.google}
                 leftIcon={<FcGoogle fontSize={"20px"} />}
+                handleClick={handleGoogleLogin}
               />
               <Button
                 sx={OAuthButtonsStyles}
                 textStyle="secondary"
                 variant={"oauth"}
+                isDisabled={true}
                 title="Continue with Apple"
                 leftIcon={<FaApple fontSize={"20px"} />}
               />

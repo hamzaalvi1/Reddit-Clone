@@ -1,15 +1,17 @@
 import { Button } from "../Button";
 import { Input } from "../Input";
-import { Text, Box } from "@chakra-ui/react";
+import { Text, Box, useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { isModalOpen } from "@/store/Slices/AuthModalSlice";
+import { getMe } from "@/store/Slices/AuthSlice";
 import { AuthConstants } from "@/config/constants";
 import { Formik } from "formik";
 import { FormikErrorText } from "../FormikErrorText";
-import * as Yup from "yup";
+import { LoginSchema } from "./ValidationSchema";
 
 function Login(props) {
   const dispatch = useDispatch();
+  const toast = useToast();
   const { inputStyles, buttonStyles } = props;
 
   const initialValues = {
@@ -17,25 +19,22 @@ function Login(props) {
     password: "",
   };
 
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Invalid Email Address")
-      .required("Field is required"),
-    password: Yup.string()
-      .min(6, "Password is less than 6 digits")
-      .required("Field is required"),
-  });
-
   const redirectSignUp = () => {
     dispatch(isModalOpen({ view: AuthConstants.SIGNUP, open: true }));
   };
+
+  const handleLogin = (values, formHandlers) => {
+    const { setSubmitting, resetForm } = formHandlers;
+    dispatch(getMe({ values, toast, setSubmitting, resetForm }));
+  };
+
   return (
     <>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values, "values");
+        validationSchema={LoginSchema}
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          handleLogin(values, { setSubmitting, resetForm });
         }}
       >
         {(formikProps) => {
@@ -46,6 +45,7 @@ function Login(props) {
             values,
             errors,
             touched,
+            isSubmitting,
           } = formikProps;
           return (
             <form onSubmit={handleSubmit} autoComplete="off">
@@ -118,6 +118,7 @@ function Login(props) {
                 sx={buttonStyles}
                 textStyle="secondary"
                 title="Log In"
+                loading={isSubmitting}
               />
               <Text fontSize={13} textStyle="secondary" margin={"0 10px"}>
                 New Reddit?
@@ -129,6 +130,7 @@ function Login(props) {
                   onClick={redirectSignUp}
                   cursor={"pointer"}
                 >
+                  {" "}
                   SignUp
                 </Text>
               </Text>

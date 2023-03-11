@@ -31,7 +31,7 @@ export const buttonStyles = {
   fontWeight: "500",
   height: "100%",
   cursor: "pointer",
-  margin: "10px 0",
+  margin: "10px 0 10px 0",
   bg: "brand.100",
   ":hover": {
     bg: "#d93a00",
