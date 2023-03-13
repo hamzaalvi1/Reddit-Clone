@@ -25,6 +25,8 @@ function AuthModal(props) {
   });
   const toast = useToast();
   const { open, view } = useSelector(({ authModal }) => authModal);
+  
+
   const dispatch = useDispatch();
 
   const handleModalClose = () => dispatch(isModalOpen({ open: false }));
