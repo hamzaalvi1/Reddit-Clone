@@ -3,6 +3,7 @@ const AuthConstants = {
   SIGNUP: "Sign Up",
   USERNAME: "Username",
   PASSWORD: "Password",
+  RESETPASSWORD: "Reset Password"
 };
 
 export default AuthConstants;

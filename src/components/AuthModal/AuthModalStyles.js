@@ -1,6 +1,7 @@
+
 export const styleProps = {
   boxShadow: "2xl",
-  maxHeight: "600px",
+  // maxHeight: "600px",
   maxWidth: "400px",
   width: "100%",
   height: "100%",

@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail
 } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
@@ -36,4 +37,5 @@ export {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail
 };

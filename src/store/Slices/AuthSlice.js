@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "@/firebase/config";
 import { AuthConstants } from "@/config/constants";
@@ -137,6 +138,37 @@ export const signInWithGoogle = createAsyncThunk(
     } finally {
       setOAuthLoading({ google: false, apple: false });
     }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "authentication/resetPassword",
+  async ({ values, toast, setSubmitting, resetForm }, { dispatch }) => {
+    const { email } = values;
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toast({
+          title: `Please check your inbox`,
+          status: "success",
+          isClosable: true,
+          duration: 8000,
+          position: "bottom-right",
+        });
+        dispatch(isModalOpen({ view: AuthConstants.LOGIN, open: true }));
+      })
+      .catch((err) => {
+        toast({
+          title: `${err.message}`,
+          status: "success",
+          isClosable: true,
+          duration: 8000,
+          position: "bottom-right",
+        });
+      })
+      .finally(() => {
+        setSubmitting(false);
+        resetForm();
+      });
   }
 );
 

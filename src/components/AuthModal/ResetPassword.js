@@ -1,42 +1,52 @@
 import { Button } from "../Button";
 import { Input } from "../Input";
+import { Image } from "@chakra-ui/react";
 import { Text, Box, useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { isModalOpen } from "@/store/Slices/AuthModalSlice";
-import { getMe } from "@/store/Slices/AuthSlice";
+import { resetPassword } from "@/store/Slices/AuthSlice";
 import { AuthConstants } from "@/config/constants";
 import { Formik } from "formik";
 import { FormikErrorText } from "../FormikErrorText";
-import { LoginSchema } from "./ValidationSchema";
+import { ResetPasswordSchema } from "./ValidationSchema";
 
-function Login(props) {
+function ResetPassword(props) {
   const dispatch = useDispatch();
   const toast = useToast();
   const { inputStyles, buttonStyles } = props;
 
   const initialValues = {
     email: "",
-    password: "",
   };
 
   const redirectSignUp = () => {
     dispatch(isModalOpen({ view: AuthConstants.SIGNUP, open: true }));
   };
-
-  const redirectResetPassword = () => {
-    dispatch(isModalOpen({ view: AuthConstants.RESETPASSWORD, open: true }));
+  const redirectLogin = () => {
+    dispatch(isModalOpen({ view: AuthConstants.LOGIN, open: true }));
   };
 
   const handleLogin = (values, formHandlers) => {
     const { setSubmitting, resetForm } = formHandlers;
-    dispatch(getMe({ values, toast, setSubmitting, resetForm }));
+    dispatch(resetPassword({ values, toast, setSubmitting, resetForm }));
   };
 
   return (
     <>
+      <Image
+        src={"/assets/images/redditFace.png"}
+        alt="reddit-face"
+        width={"40px"}
+        height={"40px"}
+        margin={"10px 0"}
+      />
+      <Text as={"p"} fontSize={13} textStyle="secondary" marginBottom={5}>
+        Tell us the username and email address associated with your Reddit
+        account, and we’ll send you an email with a link to reset your password.
+      </Text>
       <Formik
         initialValues={initialValues}
-        validationSchema={LoginSchema}
+        validationSchema={ResetPasswordSchema}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           handleLogin(values, { setSubmitting, resetForm });
         }}
@@ -72,50 +82,20 @@ function Login(props) {
                   touchedObj={touched}
                 />
               </Box>
-              <Box as="div" marginBottom={"15px"}>
-                <Input
-                  type="password"
-                  isInvalid={errors.password && touched.password}
-                  errorBorderColor="red.300"
-                  placeholder="Password"
-                  name="password"
-                  sx={inputStyles}
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  autoCompleteTag={"new-password"}
-                />
-                <FormikErrorText
-                  fieldName="password"
-                  errorObj={errors}
-                  touchedObj={touched}
-                />
-              </Box>
 
-              <Text fontSize={13} textStyle="secondary" margin={"0 10px"}>
-                Forget your{" "}
-                <Text
-                  as="span"
-                  color={"blue.600"}
-                  fontWeight={700}
-                  textStyle="primary"
-                  cursor={"pointer"}
-                  textDecoration={"underline"}
-                  onClick={redirectResetPassword}
-                >
-                  Password
-                </Text>
-                ?
-              </Text>
               <Button
                 type="submit"
                 sx={buttonStyles}
                 textStyle="secondary"
-                title="Log In"
+                title="Reset Password"
                 loading={isSubmitting}
               />
-              <Text fontSize={13} textStyle="secondary" margin={"0 10px"}>
-                New Reddit?
+              <Text
+                fontSize={13}
+                textStyle="secondary"
+                margin={"0 10px"}
+                textAlign={"center"}
+              >
                 <Text
                   as="span"
                   color={"blue.600"}
@@ -126,6 +106,18 @@ function Login(props) {
                 >
                   {" "}
                   SignUp
+                </Text>{" "}
+                -
+                <Text
+                  as="span"
+                  color={"blue.600"}
+                  fontWeight={700}
+                  textStyle="primary"
+                  onClick={redirectLogin}
+                  cursor={"pointer"}
+                >
+                  {" "}
+                  Login
                 </Text>
               </Text>
             </form>
@@ -136,4 +128,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default ResetPassword;

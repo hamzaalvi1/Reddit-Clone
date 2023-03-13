@@ -1,3 +1,4 @@
+import { AuthConstants } from "@/config/constants";
 import {
   Modal,
   ModalOverlay,
@@ -26,7 +27,7 @@ function ModalUI(props) {
     <>
       <Modal isOpen={isOpen} onClose={onClose} {...rest} >
         <ModalOverlay bg="blackAlpha.300" />
-        <ModalContent sx={styleProps}>
+        <ModalContent sx={styleProps} maxH={title == AuthConstants.RESETPASSWORD ? "400px" : "600px" }>
           <ModalHeader paddingBottom={0}>
             <Heading
               as="h6"
