@@ -23,3 +23,13 @@ export const buttonStyles = {
   cursor: "pointer",
   margin: "0 5px"
 }
+
+export const loginFeatureStyles ={
+  margin : "0 5px 0 0",
+  padding: "10px",
+  cursor:"pointer",
+  borderRadius: "5px",
+  ":hover": {
+    bg: "gray.200",
+  },
+}
